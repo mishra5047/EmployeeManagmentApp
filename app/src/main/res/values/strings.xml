@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EmployeeManagment</string>
+    <string name="no_internet">Internet Not Connected</string>
+    <string name="local_data_string">Internet Not Connected Displaying Cached Data</string>
+</resources>

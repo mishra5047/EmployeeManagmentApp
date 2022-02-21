@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "492648500123",
+    "project_id": "employeemanagment-a220e",
+    "storage_bucket": "employeemanagment-a220e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492648500123:android:3103a3f277d5f877292f3e",
+        "android_client_info": {
+          "package_name": "com.abhishek.employeemanagment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492648500123-enslnvp56o9ftego1k9n92k3tdv6c7k0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBelq6DKI5GHaRZnutmk4j7cobds6iqM1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492648500123-enslnvp56o9ftego1k9n92k3tdv6c7k0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
