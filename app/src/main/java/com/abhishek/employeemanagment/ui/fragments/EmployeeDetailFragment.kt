@@ -89,7 +89,7 @@ class EmployeeDetailFragment : Fragment() {
                         textFieldEmployeeName.editText?.setText(employeeObject.name)
                         textFieldEmployeeDesignation.editText?.setText(employeeObject.designation)
 
-                        imageViewPerson.setOnClickListener {
+                        cardViewImage.setOnClickListener {
                             if (ActivityCompat.checkSelfPermission(
                                     contextVar,
                                     android.Manifest.permission.READ_EXTERNAL_STORAGE
@@ -112,7 +112,6 @@ class EmployeeDetailFragment : Fragment() {
                     }
                 }
             }
-
             imageviewBack.setOnClickListener {
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_employee_details_fragment_to_home_fragment)
@@ -130,6 +129,13 @@ class EmployeeDetailFragment : Fragment() {
                             contextVar.toastyError("Employee Details Can't be Null")
                             return@setOnClickListener
                         }
+                        saveDetailsButton.isClickable = false
+                        editDetailsButton.isGone = true
+                        saveDetailsButton.isClickable = false
+                        saveDetailsButton.isGone = true
+                        deleteEmployeeButton.isClickable = false
+                        deleteEmployeeButton.isGone = true
+                        progressBarFragment.isVisible = true
                         employeeObject = EmployeeEntity(
                             employeeObject.id,
                             employeeName,
@@ -160,6 +166,13 @@ class EmployeeDetailFragment : Fragment() {
                             .setPositiveButton(
                                 "Yes"
                             ) { dialog, which ->
+                                editDetailsButton.isClickable = false
+                                editDetailsButton.isGone = true
+                                saveDetailsButton.isClickable = false
+                                saveDetailsButton.isGone = true
+                                deleteEmployeeButton.isClickable = false
+                                deleteEmployeeButton.isGone = true
+                                progressBarFragment.isVisible = true
                                 viewModel.deleteAnEmployeeOnline(employeeObject.id)
                                 deleteImageFromFirebaseStorage(employeeObject.profilePicUrl)
                             }
@@ -169,7 +182,6 @@ class EmployeeDetailFragment : Fragment() {
                             ) { dialog, which ->
                                 dialog.cancel()
                             }
-
                         val alertDialog: AlertDialog = builder.create()
                         alertDialog.show()
                     }
@@ -247,6 +259,7 @@ class EmployeeDetailFragment : Fragment() {
                             requireActivity().contentResolver,
                             returnUri
                         )
+                    binding.textDisplayAddImage.isGone = true
                     binding.imageViewPerson.setImageBitmap(bitmapImage)
                 }
             }
@@ -260,12 +273,15 @@ class EmployeeDetailFragment : Fragment() {
                     contextVar.toastyInfo("Processing Request")
                 }
                 is Resource.Error -> {
+                    binding.progressBarFragment.isGone = true
+                    binding.deleteEmployeeButton.isVisible = true
                     contextVar.toastyError(it.data.toString())
                 }
                 is Resource.Success -> {
                     contextVar.toastySuccess("Employee Deleted")
                     lifecycleScope.launch(Dispatchers.Main) {
                         delay(1000)
+                        binding.progressBarFragment.isGone = true
                         Navigation.findNavController(requireView())
                             .navigate(R.id.action_employee_details_fragment_to_home_fragment)
                     }

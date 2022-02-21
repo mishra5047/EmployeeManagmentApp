@@ -11,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -42,6 +44,9 @@ class EmployeeAddFragment : Fragment() {
         private const val STORAGE_PERMISSION_CODE = 101
     }
 
+    /**
+     * Callback function to instantiate binding
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,6 +56,9 @@ class EmployeeAddFragment : Fragment() {
         return _binding!!.root
     }
 
+    /**
+     * Function used for rendering the UI
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         contextVar = requireContext()
@@ -67,6 +75,9 @@ class EmployeeAddFragment : Fragment() {
         observeViewModel()
     }
 
+    /**
+     * Function to prepare the employee set to check for duplicate employee id
+     */
     private fun prepareEmployeeSet() {
         if (listOfEmployeeIds.isEmpty()) return
         listOfEmployeeIds.split(",").map {
@@ -75,12 +86,17 @@ class EmployeeAddFragment : Fragment() {
         }
     }
 
+    /**
+     * function to observe livedata variables in the view model
+     */
     private fun observeViewModel() {
         viewModel.addAnEmployeeGetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
                 }
                 is Resource.Error -> {
+                    binding.progressBarFragment.isGone = true
+                    binding.saveDetailsButton.isVisible = true
                     contextVar.toastyError(it.data.toString())
                 }
                 is Resource.Success -> {
@@ -92,15 +108,20 @@ class EmployeeAddFragment : Fragment() {
         }
     }
 
+    /**
+     * function to set click listeners for elements in UI
+     */
     private fun setOnClickListeners() {
         binding.apply {
 
-            imageViewPerson.setOnClickListener {
+            // click listener for imageview that's used to display
+            cardViewImage.setOnClickListener {
                 if (ActivityCompat.checkSelfPermission(
                         contextVar,
                         android.Manifest.permission.READ_EXTERNAL_STORAGE
                     ) != PackageManager.PERMISSION_GRANTED
                 ) {
+                    // permission not granted, ask permission
                     activity?.let { it1 ->
                         ActivityCompat.requestPermissions(
                             it1,
@@ -109,15 +130,18 @@ class EmployeeAddFragment : Fragment() {
                         )
                     }
                 } else {
+                    // permission granted open gallery
                     startGalleryToPickImage()
                 }
             }
 
+            // click listener for back button image
             imageviewBack.setOnClickListener {
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_employee_details_fragment_to_home_fragment)
             }
 
+            // click listener for save details button
             saveDetailsButton.setOnClickListener {
                 val employeeId = textFieldEmployeeId.editText?.text.toString()
                 val employeeName = textFieldEmployeeName.editText?.text.toString()
@@ -132,8 +156,12 @@ class EmployeeAddFragment : Fragment() {
                     contextVar.toastyError("Employee Id already exists")
                     return@setOnClickListener
                 }
+                saveDetailsButton.isClickable = false
+                saveDetailsButton.isGone = true
+                progressBarFragment.isVisible = true
                 employeeObject =
                     EmployeeEntity(employeeIdInt, employeeName, employeeDesignation, "")
+                // condition to check whether an image has been selected from the gallery
                 if (dataOfImageSelected == null) {
                     contextVar.toastyError("Employee Image not selected")
                 } else {
@@ -144,11 +172,18 @@ class EmployeeAddFragment : Fragment() {
         }
     }
 
+    /**
+     * function to check whether id of employee already exists.
+     * logic used - id's are added in hashset and then id is checked in hashet
+     */
     private fun checkIfEmployeeIdAlreadyExists(employeeId: Int): Boolean {
         if (setOfEmployeeIds.contains(employeeId)) return true
         return false
     }
 
+    /**
+     * function to check whether id of employee already exists
+     */
     private fun initializeViewModel() {
         contextVar = requireContext()
         viewModelProviderFactoryViewModelFactory =
@@ -214,6 +249,7 @@ class EmployeeAddFragment : Fragment() {
                 val returnUri = data?.data
                 returnUri?.let {
                     dataOfImageSelected = returnUri
+                    binding.textDisplayAddImage.isGone = true
                     val bitmapImage =
                         MediaStore.Images.Media.getBitmap(
                             requireActivity().contentResolver,

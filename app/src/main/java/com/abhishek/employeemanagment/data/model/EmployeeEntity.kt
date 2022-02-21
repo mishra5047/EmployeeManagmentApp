@@ -18,4 +18,5 @@ data class EmployeeEntity(
     val designation: String,
     @ColumnInfo(name = "ProfilePicURL")
     var profilePicUrl: String
-) : Parcelable
+) : Parcelable {
+}

@@ -98,7 +98,6 @@ class HomeFragment : Fragment() {
                 contextVar.toastyInfo("No Employees Selected")
                 return@setOnClickListener
             }
-
             when {
                 contextVar.isConnected() -> {
                     val builder: AlertDialog.Builder = AlertDialog.Builder(contextVar)
@@ -129,7 +128,7 @@ class HomeFragment : Fragment() {
 
     private fun deleteImageFromFirebaseStorage(employeeIdSet: HashSet<Int>) {
 
-        for(employeeId in employeeIdSet){
+        for (employeeId in employeeIdSet) {
             val reference = FirebaseStorage.getInstance().getReference("" + employeeId)
             reference.delete().addOnCompleteListener {
                 Log.d("TAG", "Image Deleted From Storage")
