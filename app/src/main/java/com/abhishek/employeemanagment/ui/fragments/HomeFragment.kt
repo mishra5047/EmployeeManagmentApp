@@ -24,7 +24,6 @@ import com.abhishek.employeemanagment.util.*
 import com.abhishek.employeemanagment.viewmodel.HomeFragmentViewModel
 import com.abhishek.employeemanagment.viewmodel.factory.HomeFragmentViewModelFactory
 import java.util.*
-import kotlin.collections.HashSet
 import kotlin.concurrent.schedule
 
 class HomeFragment : Fragment() {
