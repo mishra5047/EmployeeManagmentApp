@@ -23,4 +23,7 @@ class HomeFragmentRepository(database: EmployeeDatabase) {
     fun getAllEmployeesOffline() = employeeDao.getAllEmployees()
 
     suspend fun getAllEmployeesOnline() = retrofitInstance.getAllEmployeesAPI()
+
+    suspend fun deleteAnEmployeeOnline(employeeId: Int): Response<String> =
+        retrofitInstance.deleteAnEmployeesAPI(employeeId)
 }

@@ -72,6 +72,16 @@ class HomeFragmentViewModel(private val repository: HomeFragmentRepository) : Vi
         repository.deleteAllEmployeesOffline()
     }
 
+    fun deleteOneEmployee(employeeId : Int) = viewModelScope.launch(Dispatchers.IO){
+        try{
+            _deleteEmployee.postValue(Resource.Loading())
+            val response = repository.deleteAnEmployeeOnline(employeeId)
+            _deleteEmployee.postValue(handleDeleteEmployeeResponse(response))
+        }catch (e : Exception){
+            _deleteEmployee.postValue(Resource.Error(e.toString()))
+        }
+    }
+
     fun deleteMultipleEmployees(listOfEmployeeIds: HashSet<Int>) =
         viewModelScope.launch(Dispatchers.IO) {
             try {

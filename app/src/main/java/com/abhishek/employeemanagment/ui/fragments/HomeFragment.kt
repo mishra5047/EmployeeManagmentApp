@@ -120,8 +120,10 @@ class HomeFragment : Fragment() {
                     contextVar.toastyInfo("No Employees Selected")
                     return@setOnClickListener
                 }
+
                 when {
                     contextVar.isConnected() -> {
+
                         // display alertdialog to confirm deletion
                         val builder: AlertDialog.Builder = AlertDialog.Builder(contextVar)
                         builder.setMessage("Do you want to delete these employees ?")
@@ -131,8 +133,15 @@ class HomeFragment : Fragment() {
                             .setPositiveButton(
                                 "Yes"
                             ) { dialog, which ->
-                                //delete multiple employees
-                                viewModel.deleteMultipleEmployees(setOfEmployeesSelected)
+
+                                if(setOfEmployeesSelected.size == 1){
+                                    for(id in setOfEmployeesSelected) {
+                                        viewModel.deleteOneEmployee(id)
+                                    }
+                                }else{
+                                    //delete multiple employees
+                                    viewModel.deleteMultipleEmployees(setOfEmployeesSelected)
+                                }
                             }
                         builder
                             .setNegativeButton(
