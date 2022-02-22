@@ -34,18 +34,30 @@ import kotlinx.coroutines.launch
 
 class EmployeeDetailFragment : Fragment() {
 
+    // binding variables
     private var _binding: FragmentEmployeeDetailsBinding? = null
     private val binding get() = _binding!!
+
+    // context variable used throughout the fragment
     private lateinit var contextVar: Context
+
+    // viewmodel variable
     private lateinit var viewModelProviderFactoryViewModelFactory: EmployeeDetailFragmentViewModelFactory
     private lateinit var viewModel: EmployeeDetailFragmentViewModel
+
+    // global var of the employee being added
     private lateinit var employeeObject: EmployeeEntity
+
+    // URI of the image selected from the gallery (if any)
     private var dataOfImageSelected: Uri? = null
 
     companion object {
         private const val STORAGE_PERMISSION_CODE = 101
     }
 
+    /**
+     * Callback function to instantiate binding
+     */
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +67,9 @@ class EmployeeDetailFragment : Fragment() {
         return _binding!!.root
     }
 
+    /**
+     * Function used for rendering the UI
+     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.let {
@@ -72,6 +87,9 @@ class EmployeeDetailFragment : Fragment() {
         observeViewModel()
     }
 
+    /**
+     * function to set click listeners for elements in UI
+     */
     private fun setUI() {
         binding.apply {
             imageViewPerson.load(employeeObject.profilePicUrl)
@@ -95,6 +113,7 @@ class EmployeeDetailFragment : Fragment() {
                                     android.Manifest.permission.READ_EXTERNAL_STORAGE
                                 ) != PackageManager.PERMISSION_GRANTED
                             ) {
+                                // ask permission
                                 activity?.let { it1 ->
                                     ActivityCompat.requestPermissions(
                                         it1,
@@ -103,6 +122,7 @@ class EmployeeDetailFragment : Fragment() {
                                     )
                                 }
                             } else {
+                                // permission granted
                                 startGalleryToPickImage()
                             }
                         }
@@ -112,11 +132,14 @@ class EmployeeDetailFragment : Fragment() {
                     }
                 }
             }
+
+            // gallery opener image view
             imageviewBack.setOnClickListener {
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_employee_details_fragment_to_home_fragment)
             }
 
+            // save details button
             saveDetailsButton.setOnClickListener {
                 when {
                     contextVar.isConnected() -> {
@@ -193,6 +216,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * function to delete the employee's image from firebase storage when employee deleted
+     */
     private fun deleteImageFromFirebaseStorage(profilePicUrl: String) {
         val reference = FirebaseStorage.getInstance().getReferenceFromUrl(profilePicUrl)
         reference.delete().addOnCompleteListener {
@@ -200,6 +226,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * function to upload the selected image to firebase using the URI of the image selected
+     */
     private fun uploadImageToFirebase() {
         dataOfImageSelected?.let { it ->
             val storageRef =
@@ -224,6 +253,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * function to check whether the permission was granted or not in the permission asking dialog box
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -239,6 +271,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * function to open the device's gallery so that user can select an image
+     */
     private fun startGalleryToPickImage() {
         val cameraIntent =
             Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -248,6 +283,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
+/**
+ * function to get the image selected in the gallery
+ */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1000) {
@@ -260,24 +298,32 @@ class EmployeeDetailFragment : Fragment() {
                             returnUri
                         )
                     binding.textDisplayAddImage.isGone = true
+                    //rendering the selected image to the imageview
                     binding.imageViewPerson.setImageBitmap(bitmapImage)
                 }
             }
         }
     }
 
+    /**
+     * function to observe livedata variables in the view model
+     */
     private fun observeViewModel() {
+        // variable for deleting
         viewModel.deleteAnEmployeeGetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
+                    // the request is being processed
                     contextVar.toastyInfo("Processing Request")
                 }
                 is Resource.Error -> {
+                    // the request resulted in an error
                     binding.progressBarFragment.isGone = true
                     binding.deleteEmployeeButton.isVisible = true
                     contextVar.toastyError(it.data.toString())
                 }
                 is Resource.Success -> {
+                    // employee added successfully
                     contextVar.toastySuccess("Employee Deleted")
                     lifecycleScope.launch(Dispatchers.Main) {
                         delay(1000)
@@ -289,16 +335,19 @@ class EmployeeDetailFragment : Fragment() {
             }
         }
 
-        //
+        // variable for updating an employee
         viewModel.updateAnEmployeeGetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
+                    // employee added successfully
                     contextVar.toastyInfo("Processing Request")
                 }
                 is Resource.Error -> {
+                    // the request resulted in an error
                     contextVar.toastyError(it.data.toString())
                 }
                 is Resource.Success -> {
+                    // employee deleted successfully
                     contextVar.toastySuccess("Employee Details Updated")
                     lifecycleScope.launch(Dispatchers.Main) {
                         delay(2000)

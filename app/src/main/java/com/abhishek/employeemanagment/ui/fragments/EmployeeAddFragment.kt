@@ -37,7 +37,7 @@ class EmployeeAddFragment : Fragment() {
     // context variable used throughout the fragment
     private lateinit var contextVar: Context
 
-    // context variable used throughout the fragment
+    // viewmodel variables
     private lateinit var viewModelProviderFactoryViewModelFactory: EmployeeAddFragmentViewModelFactory
     private lateinit var viewModel: EmployeeAddFragmentViewModel
 
