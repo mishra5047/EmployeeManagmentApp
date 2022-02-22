@@ -1,4 +1,4 @@
-package com.abhishek.employeemanagment.di
+package com.abhishek.employeemanagment.interfaces
 
 import com.abhishek.employeemanagment.data.remote.EmployeeClassAPIResponse
 import retrofit2.Response

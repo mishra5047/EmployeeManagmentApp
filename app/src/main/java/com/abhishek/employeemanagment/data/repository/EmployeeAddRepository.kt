@@ -1,8 +1,8 @@
 package com.abhishek.employeemanagment.data.repository
 
 import com.abhishek.employeemanagment.data.model.EmployeeEntity
-import com.abhishek.employeemanagment.di.APICallInterface
-import com.abhishek.employeemanagment.di.RetrofitClient
+import com.abhishek.employeemanagment.interfaces.APICallInterface
+import com.abhishek.employeemanagment.interfaces.RetrofitClient
 
 class EmployeeAddRepository {
 

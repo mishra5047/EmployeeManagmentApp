@@ -1,10 +1,9 @@
-package com.abhishek.employeemanagment.di
+package com.abhishek.employeemanagment.interfaces
 
 import com.abhishek.employeemanagment.util.Constants
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
 
 object RetrofitClient {
 
