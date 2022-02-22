@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.abhishek.employeemanagment.databinding.ActivityMainBinding
 
-
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
@@ -16,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    /**
+     * Function to handle the back press in fragments.
+     */
     override fun onBackPressed() {
         val stackFragmentValue = binding.myNavHostFragment.findNavController().backQueue.size
         if (stackFragmentValue <= 2 || stackFragmentValue == 4) finish()

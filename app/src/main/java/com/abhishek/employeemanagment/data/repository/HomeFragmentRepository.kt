@@ -17,17 +17,10 @@ class HomeFragmentRepository(database: EmployeeDatabase) {
     fun insertEmployeeOffline(employeeEntity: EmployeeEntity) =
         employeeDao.insertEmployee(employeeEntity)
 
-    suspend fun deleteAllEmployees() = retrofitInstance.deleteAllEmployeesAPI()
-
-    suspend fun deleteAnEmployee(employeeId: Int): Response<String> =
-        retrofitInstance.deleteAnEmployeesAPI(employeeId)
-
     suspend fun deleteMultipleEmployees(listOfEmployeeId: ArrayList<Int>): Response<String> =
         retrofitInstance.deleteMultipleEmployees(listOfEmployeeId)
 
     fun getAllEmployeesOffline() = employeeDao.getAllEmployees()
 
     suspend fun getAllEmployeesOnline() = retrofitInstance.getAllEmployeesAPI()
-
-    suspend fun getLastUpdateTimeStamp() = retrofitInstance.getLastTimeStamp()
 }

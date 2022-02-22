@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBlackBackground"
-    android:padding="10dp">
+    android:padding="@dimen/dimen_10dp">
 
     <ImageView
         android:id="@+id/imageviewBack"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
         android:background="@drawable/ic_back"
         android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,19 +35,19 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewImage"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dimen_0dp"
         android:layout_marginTop="20dp"
-        android:elevation="12dp"
-        android:innerRadius="0dp"
+        android:elevation="@dimen/dimen_12dp"
+        android:innerRadius="@dimen/dimen_0dp"
         android:shape="ring"
         android:thicknessRatio="1.9"
         app:cardBackgroundColor="@color/colorBlackBackground"
-        app:cardCornerRadius="20dp"
+        app:cardCornerRadius="@dimen/dimen_20dp"
         app:layout_constraintBottom_toTopOf="@id/guidelineCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageviewBack"
         app:strokeColor="@color/white"
-        app:strokeWidth="2dp">
+        app:strokeWidth="@dimen/dimen_2dp">
 
         <LinearLayout
             android:id="@+id/textDisplayAddImage"
@@ -57,8 +57,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="@dimen/dimen_50dp"
+                android:layout_height="@dimen/dimen_50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/ic_add"
                 android:backgroundTint="@color/white" />
@@ -66,10 +66,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
                 android:text="Add Image"
                 android:textColor="@color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/dimen_24sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -85,7 +85,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/dimen_5dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -93,10 +93,10 @@
         <Button
             android:id="@+id/saveDetailsButton"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dimen_0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.4"
-            android:paddingBottom="5dp"
+            android:paddingBottom="@dimen/dimen_5dp"
             android:text="Add Employee"
             android:textColor="@color/white"
             android:visibility="visible"
@@ -112,7 +112,7 @@
         android:id="@+id/addEmployeeDetailsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardViewImage"
@@ -123,7 +123,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Employee Id"
+            android:hint="@string/employee_id"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"
@@ -147,8 +147,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Employee Name"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:hint="@string/employee_name"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"
@@ -172,8 +172,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:hint="Employee Designation"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:hint="@string/employee_designation"
             android:textColorHint="@color/white"
             app:boxStrokeColor="@color/white"
             app:hintTextColor="@color/white"

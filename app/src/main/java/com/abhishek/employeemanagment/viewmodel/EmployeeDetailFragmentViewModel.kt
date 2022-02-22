@@ -39,7 +39,6 @@ class EmployeeDetailFragmentViewModel(private val repository: EmployeeDetailRepo
     fun deleteAnEmployeeOnline(employeeId: Int) = viewModelScope.launch(Dispatchers.IO) {
         _deleteAnEmployeeList.postValue(Resource.Loading())
         val response = repository.deleteAnEmployeeOnline(employeeId = employeeId)
-//        Log.d("TAG", response.body().toString())
         _deleteAnEmployeeList.postValue(handleDeleteEmployeeResponse(response))
     }
 

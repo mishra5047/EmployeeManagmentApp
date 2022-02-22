@@ -38,7 +38,7 @@
         </action>
         <action
             android:id="@+id/action_home_fragment_to_employee_add_fragment"
-            app:destination="@id/employee_add_fragment"></action>
+            app:destination="@id/employee_add_fragment" />
     </fragment>
 
     <fragment

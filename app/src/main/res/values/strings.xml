@@ -1,5 +1,16 @@
 <resources>
-    <string name="app_name">EmployeeManagment</string>
+    <string name="app_name">Employee Management App</string>
     <string name="no_internet">Internet Not Connected</string>
     <string name="local_data_string">Internet Not Connected Displaying Cached Data</string>
+    <string name="employee_id">Employee Id</string>
+    <string name="add_image">Add Image</string>
+    <string name="employee_name">Employee Name</string>
+    <string name="edit_details">Edit Details</string>
+    <string name="save_details">Save Details</string>
+    <string name="delete_employee">Delete Employee</string>
+    <string name="employee_designation">Employee Designation</string>
+    <string name="list_of_employees">List Of Employees</string>
+    <string name="no_employees_found">No Employees Found</string>
+    <string name="title_here">Title Here</string>
+    <string name="designation">Designation</string>
 </resources>

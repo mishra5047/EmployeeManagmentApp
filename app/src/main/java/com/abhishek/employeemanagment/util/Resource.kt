@@ -1,7 +1,6 @@
 package com.abhishek.employeemanagment.util
 
-// wrapper class for API response
-
+// wrapper class for API response, that lets us check the status of response
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null

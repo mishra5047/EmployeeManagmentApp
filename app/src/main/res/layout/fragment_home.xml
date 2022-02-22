@@ -45,9 +45,10 @@
 
     <ImageView
         android:id="@+id/iconSync"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
         android:background="@drawable/ic_refresh"
         android:backgroundTint="@color/colorBlue"
         app:layout_constraintEnd_toStartOf="@id/iconDelete"
@@ -55,8 +56,9 @@
 
     <ImageView
         android:id="@+id/iconDelete"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
         android:background="@drawable/ic_delete"
         android:backgroundTint="@color/colorBlue"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
@@ -66,17 +68,16 @@
         android:id="@+id/textListTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="List Of Employees"
+        android:text="@string/list_of_employees"
         android:theme="@style/Theme.TextViewWhiteTheme"
         app:layout_constraintStart_toEndOf="@id/guidelineLeft"
-        app:layout_constraintTop_toBottomOf="@id/iconDelete" />
+        app:layout_constraintTop_toBottomOf="@id/guidelineTop" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/employeeRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/guidelineRight"
         app:layout_constraintStart_toEndOf="@id/guidelineLeft"
@@ -84,9 +85,9 @@
 
     <ImageView
         android:id="@+id/imgErrorDb"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="@dimen/dimen_150dp"
+        android:layout_height="@dimen/dimen_150dp"
+        android:layout_marginTop="@dimen/dimen_12dp"
         android:background="@drawable/img_error"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -108,9 +109,9 @@
 
         <ImageView
             android:id="@+id/imgEmptyDb"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="@dimen/dimen_150dp"
+            android:layout_height="@dimen/dimen_150dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
             android:background="@drawable/ic_empty_db"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,22 +121,21 @@
             android:id="@+id/textNoEmployees"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="No Employees Found"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="@string/no_employees_found"
             android:theme="@style/Theme.TextViewWhiteTheme"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgEmptyDb" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addEmployeeButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/dimen_45dp"
+        android:layout_height="@dimen/dimen_45dp"
         android:backgroundTint="@color/colorBlue"
         android:src="@drawable/ic_add"
-        app:fabCustomSize="45dp"
+        app:fabCustomSize="@dimen/dimen_45dp"
         app:layout_constraintBottom_toTopOf="@id/guidelineBottom"
         app:layout_constraintEnd_toStartOf="@+id/guidelineRight" />
 </androidx.constraintlayout.widget.ConstraintLayout>

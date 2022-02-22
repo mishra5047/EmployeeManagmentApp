@@ -4,25 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorBlackBackground"
-    android:paddingVertical="10dp">
+    android:paddingVertical="@dimen/dimen_10dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/dimen_50dp"
+        android:layout_height="@dimen/dimen_50dp"
         android:layout_centerHorizontal="true"
-        android:elevation="12dp"
-        android:innerRadius="0dp"
+        android:elevation="@dimen/dimen_12dp"
+        android:innerRadius="@dimen/dimen_0dp"
         android:shape="ring"
         android:thicknessRatio="1.9"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="@dimen/dimen_40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imageViewPerson"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="@dimen/dimen_60dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
@@ -30,9 +30,9 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_width="@dimen/dimen_0dp"
+        android:layout_height="@dimen/dimen_0dp"
+        android:layout_marginHorizontal="@dimen/dimen_10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/checkBoxSelect"
         app:layout_constraintStart_toEndOf="@id/cardView"
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Title Here"
+            android:text="@string/title_here"
             android:theme="@style/Theme.TextViewListEmployeeTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -54,10 +54,10 @@
             android:id="@+id/designationEmployee"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="@dimen/dimen_2dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Designation"
+            android:text="@string/designation"
             android:theme="@style/Theme.TextViewListEmployeeDesignation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleEmployee" />
@@ -65,9 +65,9 @@
 
     <CheckBox
         android:id="@+id/checkBoxSelect"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginEnd="@dimen/dimen_16dp"
         app:layout_constraintBottom_toTopOf="@id/viewBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,8 +75,8 @@
     <View
         android:id="@+id/viewBottom"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
         android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cardView" />

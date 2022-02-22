@@ -30,13 +30,24 @@ import com.google.firebase.storage.FirebaseStorage
 
 class EmployeeAddFragment : Fragment() {
 
+    // binding variables
     private var _binding: FragmentAddEmployeeBinding? = null
     private val binding get() = _binding!!
+
+    // context variable used throughout the fragment
     private lateinit var contextVar: Context
+
+    // context variable used throughout the fragment
     private lateinit var viewModelProviderFactoryViewModelFactory: EmployeeAddFragmentViewModelFactory
     private lateinit var viewModel: EmployeeAddFragmentViewModel
+
+    // global var of the employee being added
     private lateinit var employeeObject: EmployeeEntity
+
+    // URI of the image selected from the gallery (if any)
     private var dataOfImageSelected: Uri? = null
+
+    // variables used to make sure we don't add any employee with duplicate ID
     private lateinit var listOfEmployeeIds: String
     private lateinit var setOfEmployeeIds: HashSet<Int>
 
@@ -93,13 +104,18 @@ class EmployeeAddFragment : Fragment() {
         viewModel.addAnEmployeeGetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
+                    // the request is being processed
+                    binding.saveDetailsButton.isGone = true
+                    binding.progressBarFragment.isVisible = true
                 }
                 is Resource.Error -> {
+                    // the request resulted in an error
                     binding.progressBarFragment.isGone = true
                     binding.saveDetailsButton.isVisible = true
                     contextVar.toastyError(it.data.toString())
                 }
                 is Resource.Success -> {
+                    // employee added successfully
                     contextVar.toastySuccess("Employee Added")
                     Navigation.findNavController(requireView())
                         .navigate(R.id.action_employee_add_fragment_to_home_fragment)
@@ -138,7 +154,7 @@ class EmployeeAddFragment : Fragment() {
             // click listener for back button image
             imageviewBack.setOnClickListener {
                 Navigation.findNavController(requireView())
-                    .navigate(R.id.action_employee_details_fragment_to_home_fragment)
+                    .navigate(R.id.action_employee_add_fragment_to_home_fragment)
             }
 
             // click listener for save details button
@@ -156,15 +172,15 @@ class EmployeeAddFragment : Fragment() {
                     contextVar.toastyError("Employee Id already exists")
                     return@setOnClickListener
                 }
-                saveDetailsButton.isClickable = false
-                saveDetailsButton.isGone = true
-                progressBarFragment.isVisible = true
                 employeeObject =
                     EmployeeEntity(employeeIdInt, employeeName, employeeDesignation, "")
-                // condition to check whether an image has been selected from the gallery
+                // condition to check whether an image has been selected from the gallery and uploading the image (if present to firebase) then hitting the API
                 if (dataOfImageSelected == null) {
                     contextVar.toastyError("Employee Image not selected")
                 } else {
+                    saveDetailsButton.isClickable = false
+                    saveDetailsButton.isGone = true
+                    progressBarFragment.isVisible = true
                     contextVar.toastyInfo("Adding employee please wait")
                     uploadImageToFirebase()
                 }
@@ -195,6 +211,9 @@ class EmployeeAddFragment : Fragment() {
         )
     }
 
+    /**
+     * function to check whether the permission was granted or not in the permission asking dialog box
+     */
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -203,13 +222,18 @@ class EmployeeAddFragment : Fragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == STORAGE_PERMISSION_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // permission has been granted
                 startGalleryToPickImage()
             } else {
+                //permission denied
                 contextVar.toastyError("Kindly give storage permission to pick image from gallery")
             }
         }
     }
 
+    /**
+     * function to open the device's gallery so that user can select an image
+     */
     private fun startGalleryToPickImage() {
         val cameraIntent =
             Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -219,7 +243,12 @@ class EmployeeAddFragment : Fragment() {
         }
     }
 
+    /**
+     * function to upload the selected image to firebase using the URI of the image selected
+     */
     private fun uploadImageToFirebase() {
+
+        // checking whether the data of image is selected or not
         dataOfImageSelected?.let { it ->
             val storageRef =
                 FirebaseStorage.getInstance().reference.child(employeeObject.id.toString())
@@ -243,6 +272,9 @@ class EmployeeAddFragment : Fragment() {
         }
     }
 
+    /**
+     * function to get the image selected in the gallery
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == 1000) {
@@ -255,9 +287,20 @@ class EmployeeAddFragment : Fragment() {
                             requireActivity().contentResolver,
                             returnUri
                         )
+
+                    //rendering the selected image to the imageview
                     binding.imageViewPerson.setImageBitmap(bitmapImage)
                 }
             }
         }
+    }
+
+    /**
+     * nulling the binding to handle memory leaks.
+     * Reference - https://medium.com/default-to-open/handling-lifecycle-with-view-binding-in-fragments-a7f237c56832
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

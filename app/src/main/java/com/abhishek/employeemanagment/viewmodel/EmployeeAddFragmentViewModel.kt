@@ -30,6 +30,4 @@ class EmployeeAddFragmentViewModel(private val repository: EmployeeAddRepository
         }
         return Resource.Error(response.errorBody().toString())
     }
-
-
 }

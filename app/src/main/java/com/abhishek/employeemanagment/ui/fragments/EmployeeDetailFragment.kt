@@ -289,6 +289,7 @@ class EmployeeDetailFragment : Fragment() {
             }
         }
 
+        //
         viewModel.updateAnEmployeeGetter.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Loading -> {
@@ -309,6 +310,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
+    /**
+     * function to initialise the viewmodel factory and
+     */
     private fun initializeViewModel() {
         contextVar = requireContext()
         viewModelProviderFactoryViewModelFactory =
@@ -318,5 +322,14 @@ class EmployeeDetailFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelProviderFactoryViewModelFactory).get(
             EmployeeDetailFragmentViewModel::class.java
         )
+    }
+
+    /**
+     * nulling the binding to handle memory leaks.
+     * Reference - https://medium.com/default-to-open/handling-lifecycle-with-view-binding-in-fragments-a7f237c56832
+     */
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
