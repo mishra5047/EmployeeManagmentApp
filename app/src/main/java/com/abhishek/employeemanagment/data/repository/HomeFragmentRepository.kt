@@ -6,10 +6,11 @@ import com.abhishek.employeemanagment.data.model.EmployeeEntity
 import com.abhishek.employeemanagment.interfaces.APICallInterface
 import com.abhishek.employeemanagment.interfaces.RetrofitClient
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class HomeFragmentRepository(database: EmployeeDatabase) {
-
-    private var employeeDao: EmployeeDao = database.employeeDao()
+@Singleton
+class HomeFragmentRepository @Inject constructor(private val employeeDao: EmployeeDao) {
     private val retrofitInstance = RetrofitClient.getInstance().create(APICallInterface::class.java)
 
     fun deleteAllEmployeesOffline() = employeeDao.deleteAllEmployees()

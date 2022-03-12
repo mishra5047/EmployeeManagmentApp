@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.abhishek.employeemanagment.R
@@ -25,9 +26,10 @@ import com.abhishek.employeemanagment.util.toastyError
 import com.abhishek.employeemanagment.util.toastyInfo
 import com.abhishek.employeemanagment.util.toastySuccess
 import com.abhishek.employeemanagment.viewmodel.EmployeeAddFragmentViewModel
-import com.abhishek.employeemanagment.viewmodel.factory.EmployeeAddFragmentViewModelFactory
 import com.google.firebase.storage.FirebaseStorage
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class EmployeeAddFragment : Fragment() {
 
     // binding variables
@@ -38,8 +40,7 @@ class EmployeeAddFragment : Fragment() {
     private lateinit var contextVar: Context
 
     // viewmodel variables
-    private lateinit var viewModelProviderFactoryViewModelFactory: EmployeeAddFragmentViewModelFactory
-    private lateinit var viewModel: EmployeeAddFragmentViewModel
+    private val viewModel: EmployeeAddFragmentViewModel by viewModels()
 
     // global var of the employee being added
     private lateinit var employeeObject: EmployeeEntity
@@ -202,13 +203,6 @@ class EmployeeAddFragment : Fragment() {
      */
     private fun initializeViewModel() {
         contextVar = requireContext()
-        viewModelProviderFactoryViewModelFactory =
-            EmployeeAddFragmentViewModelFactory(
-                EmployeeAddRepository()
-            )
-        viewModel = ViewModelProvider(this, viewModelProviderFactoryViewModelFactory).get(
-            EmployeeAddFragmentViewModel::class.java
-        )
     }
 
     /**

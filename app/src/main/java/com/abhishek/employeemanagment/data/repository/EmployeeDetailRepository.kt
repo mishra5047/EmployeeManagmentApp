@@ -4,8 +4,11 @@ import com.abhishek.employeemanagment.data.model.EmployeeEntity
 import com.abhishek.employeemanagment.interfaces.APICallInterface
 import com.abhishek.employeemanagment.interfaces.RetrofitClient
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class EmployeeDetailRepository {
+@Singleton
+class EmployeeDetailRepository @Inject constructor(){
 
     private val retrofitInstance = RetrofitClient.getInstance().create(APICallInterface::class.java)
 

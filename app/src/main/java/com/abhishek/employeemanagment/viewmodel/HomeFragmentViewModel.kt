@@ -8,11 +8,14 @@ import com.abhishek.employeemanagment.data.model.EmployeeEntity
 import com.abhishek.employeemanagment.data.remote.EmployeeClassAPIResponse
 import com.abhishek.employeemanagment.data.repository.HomeFragmentRepository
 import com.abhishek.employeemanagment.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class HomeFragmentViewModel(private val repository: HomeFragmentRepository) : ViewModel() {
+@HiltViewModel
+class HomeFragmentViewModel @Inject constructor(private val repository: HomeFragmentRepository) : ViewModel() {
 
     val employeesGetterOffline: LiveData<Resource<List<EmployeeEntity>>> get() = _employeesListOffline
     private val _employeesListOffline = MutableLiveData<Resource<List<EmployeeEntity>>>()
