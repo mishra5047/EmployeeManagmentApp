@@ -1,6 +1,5 @@
 package com.abhishek.employeemanagment.interfaces
 
-import com.abhishek.employeemanagment.di.ApplicationClass
 import com.abhishek.employeemanagment.util.Constants
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

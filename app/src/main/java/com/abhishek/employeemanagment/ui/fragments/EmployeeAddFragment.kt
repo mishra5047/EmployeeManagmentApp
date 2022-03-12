@@ -15,11 +15,9 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.abhishek.employeemanagment.R
 import com.abhishek.employeemanagment.data.model.EmployeeEntity
-import com.abhishek.employeemanagment.data.repository.EmployeeAddRepository
 import com.abhishek.employeemanagment.databinding.FragmentAddEmployeeBinding
 import com.abhishek.employeemanagment.util.Resource
 import com.abhishek.employeemanagment.util.toastyError

@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class EmployeeAddRepository @Inject constructor(){
+class EmployeeAddRepository @Inject constructor() {
     private val retrofitInstance = RetrofitClient.getInstance().create(APICallInterface::class.java)
     suspend fun addAnEmployee(employeeEntity: EmployeeEntity) = retrofitInstance.addAnEmployeesAPI(
         employeeEntity.id,

@@ -14,7 +14,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class EmployeeAddFragmentViewModel @Inject constructor(private val repository: EmployeeAddRepository) : ViewModel() {
+class EmployeeAddFragmentViewModel @Inject constructor(private val repository: EmployeeAddRepository) :
+    ViewModel() {
 
     val addAnEmployeeGetter: LiveData<Resource<String>> get() = _addAnEmployeeList
     private val _addAnEmployeeList = MutableLiveData<Resource<String>>()

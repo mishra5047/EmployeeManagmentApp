@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class EmployeeDetailRepository @Inject constructor(){
+class EmployeeDetailRepository @Inject constructor() {
 
     private val retrofitInstance = RetrofitClient.getInstance().create(APICallInterface::class.java)
 

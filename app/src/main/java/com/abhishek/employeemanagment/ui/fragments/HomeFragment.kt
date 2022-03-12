@@ -125,11 +125,11 @@ class HomeFragment : Fragment() {
                                 "Yes"
                             ) { dialog, which ->
 
-                                if(setOfEmployeesSelected.size == 1){
-                                    for(id in setOfEmployeesSelected) {
+                                if (setOfEmployeesSelected.size == 1) {
+                                    for (id in setOfEmployeesSelected) {
                                         viewModel.deleteOneEmployee(id)
                                     }
-                                }else{
+                                } else {
                                     //delete multiple employees
                                     viewModel.deleteMultipleEmployees(setOfEmployeesSelected)
                                 }

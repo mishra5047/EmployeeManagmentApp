@@ -28,6 +28,7 @@
 - [Firebase](https://console.firebase.google.com/) - Storage
 - [Androidx](https://developer.android.com/jetpack/androidx) - For Layouts, Navigation, Fragments and more
 - [Kotlin Coroutines](https://developer.android.com/kotlin/coroutines) - For Asynchronous Task
+- [Hilt](https://developer.android.com/training/dependency-injection) - For Dependency Injection 
 - [Room DB](https://developer.android.com/training/data-storage/room) - For Local Database
 - [Coil](https://coil-kt.github.io/coil/) - For Loading Images
 - [Retrofit](https://square.github.io/retrofit/) - For HTTP Client
@@ -52,10 +53,13 @@
     "Contains the utility functions / classes, and wrapper class for the response from API that are used throughout the application"
 
 ## viewmodel -
-    "Contains the classes for the activity/fragment viewmodels and their factories"
+    "Contains the classes for the activity/fragment viewmodels"
 
 ## res -
     "Contains the resources used throughout the application, like - drawable, layout, navigation, and values."
+
+## di - 
+    "Contains the Application Class required by Hilt"
 
 ## ⛏️ Built With <a name = "tech_stack"></a>
 

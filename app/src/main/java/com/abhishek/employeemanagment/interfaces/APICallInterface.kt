@@ -3,11 +3,10 @@ package com.abhishek.employeemanagment.interfaces
 import com.abhishek.employeemanagment.data.remote.EmployeeClassAPIResponse
 import retrofit2.Response
 import retrofit2.http.*
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-interface APICallInterface{
+interface APICallInterface {
     @GET("/allEmployees")
     suspend fun getAllEmployeesAPI(): Response<List<EmployeeClassAPIResponse>>
 

@@ -282,9 +282,9 @@ class EmployeeDetailFragment : Fragment() {
         }
     }
 
-/**
- * function to get the image selected in the gallery
- */
+    /**
+     * function to get the image selected in the gallery
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == RESULT_OK) {
             if (requestCode == 1000) {

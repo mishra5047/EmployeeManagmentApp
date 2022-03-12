@@ -1,6 +1,5 @@
 package com.abhishek.employeemanagment.data.repository
 
-import com.abhishek.employeemanagment.data.local.EmployeeDatabase
 import com.abhishek.employeemanagment.data.model.EmployeeDao
 import com.abhishek.employeemanagment.data.model.EmployeeEntity
 import com.abhishek.employeemanagment.interfaces.APICallInterface

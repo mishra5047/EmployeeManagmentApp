@@ -15,7 +15,8 @@ import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeFragmentViewModel @Inject constructor(private val repository: HomeFragmentRepository) : ViewModel() {
+class HomeFragmentViewModel @Inject constructor(private val repository: HomeFragmentRepository) :
+    ViewModel() {
 
     val employeesGetterOffline: LiveData<Resource<List<EmployeeEntity>>> get() = _employeesListOffline
     private val _employeesListOffline = MutableLiveData<Resource<List<EmployeeEntity>>>()
@@ -75,12 +76,12 @@ class HomeFragmentViewModel @Inject constructor(private val repository: HomeFrag
         repository.deleteAllEmployeesOffline()
     }
 
-    fun deleteOneEmployee(employeeId : Int) = viewModelScope.launch(Dispatchers.IO){
-        try{
+    fun deleteOneEmployee(employeeId: Int) = viewModelScope.launch(Dispatchers.IO) {
+        try {
             _deleteEmployee.postValue(Resource.Loading())
             val response = repository.deleteAnEmployeeOnline(employeeId)
             _deleteEmployee.postValue(handleDeleteEmployeeResponse(response))
-        }catch (e : Exception){
+        } catch (e: Exception) {
             _deleteEmployee.postValue(Resource.Error(e.toString()))
         }
     }
