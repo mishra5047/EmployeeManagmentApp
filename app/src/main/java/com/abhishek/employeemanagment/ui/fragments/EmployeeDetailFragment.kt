@@ -16,22 +16,22 @@ import androidx.core.app.ActivityCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import coil.load
 import com.abhishek.employeemanagment.R
 import com.abhishek.employeemanagment.data.model.EmployeeEntity
-import com.abhishek.employeemanagment.data.repository.EmployeeDetailRepository
 import com.abhishek.employeemanagment.databinding.FragmentEmployeeDetailsBinding
 import com.abhishek.employeemanagment.util.*
 import com.abhishek.employeemanagment.viewmodel.EmployeeDetailFragmentViewModel
-import com.abhishek.employeemanagment.viewmodel.factory.EmployeeDetailFragmentViewModelFactory
 import com.google.firebase.storage.FirebaseStorage
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class EmployeeDetailFragment : Fragment() {
 
     // binding variables
@@ -42,8 +42,7 @@ class EmployeeDetailFragment : Fragment() {
     private lateinit var contextVar: Context
 
     // viewmodel variable
-    private lateinit var viewModelProviderFactoryViewModelFactory: EmployeeDetailFragmentViewModelFactory
-    private lateinit var viewModel: EmployeeDetailFragmentViewModel
+    private val viewModel: EmployeeDetailFragmentViewModel by viewModels()
 
     // global var of the employee being added
     private lateinit var employeeObject: EmployeeEntity
@@ -364,13 +363,6 @@ class EmployeeDetailFragment : Fragment() {
      */
     private fun initializeViewModel() {
         contextVar = requireContext()
-        viewModelProviderFactoryViewModelFactory =
-            EmployeeDetailFragmentViewModelFactory(
-                EmployeeDetailRepository()
-            )
-        viewModel = ViewModelProvider(this, viewModelProviderFactoryViewModelFactory).get(
-            EmployeeDetailFragmentViewModel::class.java
-        )
     }
 
     /**

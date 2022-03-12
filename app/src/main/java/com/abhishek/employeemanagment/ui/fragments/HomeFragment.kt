@@ -10,22 +10,21 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abhishek.employeemanagment.R
-import com.abhishek.employeemanagment.data.local.EmployeeDatabase
 import com.abhishek.employeemanagment.data.model.EmployeeEntity
 import com.abhishek.employeemanagment.data.remote.EmployeeClassAPIResponse
-import com.abhishek.employeemanagment.data.repository.HomeFragmentRepository
 import com.abhishek.employeemanagment.databinding.FragmentHomeBinding
 import com.abhishek.employeemanagment.ui.adapters.EmployeeListAdapter
 import com.abhishek.employeemanagment.util.*
 import com.abhishek.employeemanagment.viewmodel.HomeFragmentViewModel
-import com.abhishek.employeemanagment.viewmodel.factory.HomeFragmentViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import kotlin.concurrent.schedule
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     // binding variables
@@ -36,8 +35,7 @@ class HomeFragment : Fragment() {
     private lateinit var contextVar: Context
 
     // context variable used throughout the fragment
-    private lateinit var viewModelProviderFactoryViewModelFactory: HomeFragmentViewModelFactory
-    private lateinit var viewModel: HomeFragmentViewModel
+    private val viewModel: HomeFragmentViewModel by viewModels()
 
     // list of employees adapter variable
     private lateinit var employeeListAdapter: EmployeeListAdapter
@@ -65,13 +63,6 @@ class HomeFragment : Fragment() {
      */
     private fun setUserInterface() {
         contextVar = requireContext()
-        viewModelProviderFactoryViewModelFactory =
-            HomeFragmentViewModelFactory(
-                HomeFragmentRepository(EmployeeDatabase(contextVar))
-            )
-        viewModel = ViewModelProvider(this, viewModelProviderFactoryViewModelFactory).get(
-            HomeFragmentViewModel::class.java
-        )
         getEmployeesList()
         observeViewModel()
         attachClickListeners()

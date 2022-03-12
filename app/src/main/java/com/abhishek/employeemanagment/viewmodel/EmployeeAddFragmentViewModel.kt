@@ -7,11 +7,14 @@ import androidx.lifecycle.viewModelScope
 import com.abhishek.employeemanagment.data.model.EmployeeEntity
 import com.abhishek.employeemanagment.data.repository.EmployeeAddRepository
 import com.abhishek.employeemanagment.util.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
+import javax.inject.Inject
 
-class EmployeeAddFragmentViewModel(private val repository: EmployeeAddRepository) : ViewModel() {
+@HiltViewModel
+class EmployeeAddFragmentViewModel @Inject constructor(private val repository: EmployeeAddRepository) : ViewModel() {
 
     val addAnEmployeeGetter: LiveData<Resource<String>> get() = _addAnEmployeeList
     private val _addAnEmployeeList = MutableLiveData<Resource<String>>()
